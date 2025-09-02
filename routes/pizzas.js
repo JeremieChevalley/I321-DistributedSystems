@@ -3,13 +3,13 @@ import { getPizzas, getPizzaById, createPizza } from "../controllers/pizzas.js";
 
 const router = express.Router();
 
-// GET /api/pizzas
+// GET /pizzas
 router.get("/", getPizzas);
 
-// GET /api/pizzas/:id
+// GET /pizzas/:id
 router.get("/:id", getPizzaById);
 
-// POST /api/pizzas
+// POST /pizzas
 router.post("/", createPizza);
 
 export default router;
