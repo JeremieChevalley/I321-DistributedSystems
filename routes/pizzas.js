@@ -1,15 +1,19 @@
 import express from "express";
-import { getPizzas, getPizzaById, createPizza } from "../controllers/pizzas.js";
+import {
+    getPizzas,
+    getPizzaById,
+    createPizza,
+    patchPizza,
+    deletePizza
+} from "../controllers/pizzas.js";
 
 const router = express.Router();
 
-// GET /pizzas
+// CRUD Pizzas
 router.get("/", getPizzas);
-
-// GET /pizzas/:id
 router.get("/:id", getPizzaById);
-
-// POST /pizzas
 router.post("/", createPizza);
+router.put("/:id", patchPizza);
+router.delete("/:id", deletePizza);
 
 export default router;

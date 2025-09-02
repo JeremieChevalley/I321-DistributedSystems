@@ -24,7 +24,7 @@ export const getPizzaById = (req, res) => {
     const pizza = pizzas.find(p => p.id === pizzaId);
 
     if (!pizza) {
-        return res.status(404).json({ message: "Pizza non trouvée 😢" });
+        return res.status(404).json({ message: "Pizza non trouvée" });
     }
 
     res.json(pizza);
@@ -36,3 +36,31 @@ export const createPizza = (req, res) => {
     pizzas.push(newPizza);
     res.status(201).json(newPizza);
 };
+
+// PATCH -> mise à jour partielle d'une pizza
+export const patchPizza = (req, res) => {
+    const pizzaId = parseInt(req.params.id);
+    const index = pizzas.findIndex(p => p.id === pizzaId);
+
+    if (index === -1) {
+        return res.status(404).json({ message: "Pizza non trouvée" });
+    }
+
+    // Mise à jour partielle : on fusionne l'ancien et le nouveau
+    pizzas[index] = { ...pizzas[index], ...req.body };
+    res.json(pizzas[index]);
+};
+
+// DELETE -> supprimer une pizza
+export const deletePizza = (req, res) => {
+    const pizzaId = parseInt(req.params.id);
+    const index = pizzas.findIndex(p => p.id === pizzaId);
+
+    if (index === -1) {
+        return res.status(404).json({ message: "Pizza non trouvée" });
+    }
+
+    const deleted = pizzas.splice(index, 1);
+    res.json({ message: "Pizza supprimée ✅", pizza: deleted[0] });
+};
+
