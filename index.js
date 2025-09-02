@@ -1,14 +1,19 @@
 import express from "express";
-import pizza from "./routes/pizza.js";
+import pizzas from "./routes/pizzas.js";
 
 const app = express();
 const port = 3000;
 
 app.use(express.json());
 
-// Brancher les routes
-app.use("/api/pizzas", pizza);
+// Route racine
+app.get("/", (req, res) => {
+    res.send("Bienvenue");
+});
+
+// Routes pizzas
+app.use("/pizzas", pizzas);
 
 app.listen(port, () => {
-    console.log(`✅ API running on http://localhost:${port}`);
+    console.log(`✅ Pizza API running on http://localhost:${port}`);
 });
