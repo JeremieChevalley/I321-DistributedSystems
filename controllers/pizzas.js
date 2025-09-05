@@ -37,7 +37,7 @@ export const createPizza = (req, res) => {
     res.status(201).json(newPizza);
 };
 
-// PATCH -> mise à jour partielle d'une pizza
+// PATCH -> mise à jour d'une pizza
 export const patchPizza = (req, res) => {
     const pizzaId = parseInt(req.params.id);
     const index = pizzas.findIndex(p => p.id === pizzaId);

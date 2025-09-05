@@ -1,0 +1,26 @@
+@startuml
+actor Client as Foo
+participant "Global Router\n (index.js)" as Foo1
+participant "Routes\n (pizzas.js)" as Foo2
+participant "Controller\n (pizzas.js)" as Foo3
+participant "Entity\n Pizzas (Sequelize)" as Foo4
+database DB as Foo5
+
+== Pizzas creation flow ==
+Foo -> Foo1 : POST /api/v1/products
+Foo1 -> Foo2 : delegates to /routes/pizzas.js
+Foo2 -> Foo3 : createPizza(req)
+Foo3 -> Foo4 : Pizza.create ({ name, price, image, ingredients})
+alt Validation error
+    Foo4 --> Foo3 : SequelizeValidationError
+    Foo3 --> Foo : Bad Request + validation messages
+else Success
+    Foo4 --> Foo5 : INSERT INTO pizzas(name, price, image, ingredients)\n VALUES(...)
+    Foo5 --> Foo4 : Ack (row inserted)
+    Foo4 --> Foo3 : Success
+    Foo3 --> Foo : 200 OK+ {"success":true,"message":"Pizza created successfully"}
+==Error Case==
+Foo3 -> Foo : 500 Internal Server Error (unexpected))
+end
+@enduml
+

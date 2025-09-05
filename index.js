@@ -12,8 +12,8 @@ app.get("/", (req, res) => {
 });
 
 // Routes pizzas
-app.use("/pizzas", pizzas);
+app.use("api/pizzas", pizzas);
 
 app.listen(port, () => {
-    console.log(`✅ Pizza API running on http://localhost:${port}`);
+    console.log(`Pizza API running on http://localhost:${port}`);
 });
