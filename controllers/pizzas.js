@@ -61,6 +61,6 @@ export const deletePizza = (req, res) => {
     }
 
     const deleted = pizzas.splice(index, 1);
-    res.json({ message: "Pizza supprimée ✅", pizza: deleted[0] });
+    res.json({ message: "Pizza supprimée", pizza: deleted[0] });
 };
 
