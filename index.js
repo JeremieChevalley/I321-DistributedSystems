@@ -12,7 +12,7 @@ app.get("/", (req, res) => {
 });
 
 // Routes pizzas
-app.use("api/pizzas", pizzas);
+app.use("/api/v1/pizzas", pizzas);
 
 app.listen(port, () => {
     console.log(`Pizza API running on http://localhost:${port}`);
